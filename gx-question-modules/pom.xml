@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.guanxun</groupId>
+		<artifactId>gx-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../gx-parent/pom.xml</relativePath>
+	</parent>
+	<artifactId>gx-question-modules</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>gx-question-server</module>
+		<module>gx-question-service</module>
+		<module>gx-question-model</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.guanxun</groupId>
+				<artifactId>gx-common</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.guanxun</groupId>
+				<artifactId>gx-persistence</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.guanxun</groupId>
+				<artifactId>gx-redis</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.guanxun</groupId>
+				<artifactId>gx-question-service</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.guanxun</groupId>
+				<artifactId>gx-question-model</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.guanxun</groupId>
+				<artifactId>gx-question-model</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>
