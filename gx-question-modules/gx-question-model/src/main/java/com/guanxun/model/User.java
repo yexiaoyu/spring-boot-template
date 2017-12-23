@@ -1,5 +1,7 @@
 package com.guanxun.model;
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.*;
 
 public class User implements Serializable{
@@ -41,5 +43,10 @@ public class User implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

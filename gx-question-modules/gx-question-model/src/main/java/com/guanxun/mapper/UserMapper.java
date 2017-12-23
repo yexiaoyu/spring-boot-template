@@ -3,7 +3,6 @@ package com.guanxun.mapper;
 import com.guanxun.model.*;
 import com.guanxun.provider.UserProvider;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.jdbc.SQL;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
