@@ -7,3 +7,9 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `user` VALUES ('1', '7player', '18', '123456');
+
+CREATE TABLE `gx_keygen` (
+  `table_name` varchar(128) NOT NULL,
+  `last_used_id` bigint(20) unsigned NOT NULL,
+PRIMARY KEY (`table_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

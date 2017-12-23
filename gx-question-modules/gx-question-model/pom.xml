@@ -22,5 +22,9 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.guanxun</groupId>
+            <artifactId>gx-persistence</artifactId>
+        </dependency>
+    </dependencies>
 </project>

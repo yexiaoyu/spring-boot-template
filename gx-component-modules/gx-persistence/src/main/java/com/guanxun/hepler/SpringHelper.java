@@ -1,4 +1,4 @@
-package com.guanxun.common.helper;
+package com.guanxun.hepler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,10 +6,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.stereotype.Component;
 
-/**
- * Created by lvdin on 2016/10/22.
- */
+@Component
 public class SpringHelper implements ApplicationContextAware {
     protected static final Logger LOGGER = LoggerFactory.getLogger(SpringHelper.class);
     private static ApplicationContext context;
