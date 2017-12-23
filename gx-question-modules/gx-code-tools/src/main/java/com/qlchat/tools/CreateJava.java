@@ -84,11 +84,11 @@ public class CreateJava {
 			List<ColumnData> columnDatas = createBean.getColumnDatas(schema, tableName);
 			context.put("columnDatas", columnDatas); // 生成bean
 			context.put("pk", createBean);
-			String columnName = "";
+			String columnNames = "";
 			for(ColumnData columnData : columnDatas){
-				columnName += columnData.getColumnName() + ",";
+				columnNames += columnData.getColumnName() + " '"+columnData.getFieldName()+"',";
 			}
-			context.put("columnName", columnName.substring(0, columnName.length() - 1));
+			context.put("columnNames", columnNames.substring(0, columnNames.length() - 1));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

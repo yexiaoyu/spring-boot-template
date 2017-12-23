@@ -8,13 +8,13 @@ import java.util.Map;
 
 public class ${className}Provider {
     private final String TABLENAME = "${tableName}";
-    private final String COLUMNS = "${columnName}";
+    private final String COLUMNS = "${columnNames}";
 
     public String load(${pk.keyJavaType} $pk.keyFieldName){
         return new SQL(){{
             SELECT(COLUMNS);
             FROM(TABLENAME);
-            WHERE("$pk.keyFieldName=#{$pk.keyFieldName}");
+            WHERE("$pk.keyName=#{$pk.keyFieldName}");
         }}.toString();
     }
 
@@ -23,7 +23,7 @@ public class ${className}Provider {
             INSERT_INTO(TABLENAME);
         #foreach($item in $!{columnDatas})
             if(GxUtils.isNotEmpty(${lowerName}.get${item.maxFieldName}())){
-                VALUES("$item.fieldName","#{$item.fieldName}");
+                VALUES("$item.columnName","#{$item.fieldName}");
             }
         #end
         }}.toString();
@@ -34,17 +34,17 @@ public class ${className}Provider {
             UPDATE(TABLENAME);
         #foreach($item in $!{columnDatas})
             if(GxUtils.isNotEmpty(${lowerName}.get${item.maxFieldName}())){
-                SET("$item.fieldName=#{$item.fieldName}");
+                SET("$item.columnName=#{$item.fieldName}");
             }
         #end
-            WHERE("$pk.keyFieldName=#{$pk.keyFieldName}");
+            WHERE("$pk.keyName=#{$pk.keyFieldName}");
         }}.toString();
     }
 
     public String delete(${pk.keyJavaType} $pk.keyFieldName) {
         return new SQL(){{
             DELETE_FROM(TABLENAME);
-            WHERE("$pk.keyFieldName=#{$pk.keyFieldName}");
+            WHERE("$pk.keyName=#{$pk.keyFieldName}");
         }}.toString();
     }
 
@@ -54,7 +54,7 @@ public class ${className}Provider {
             FROM(TABLENAME);
         #foreach($item in $!{columnDatas})
             if(GxUtils.isNotEmpty(${lowerName}.get${item.maxFieldName}())){
-                WHERE("$item.fieldName=#{$item.fieldName}");
+                WHERE("$item.columnName=#{$item.fieldName}");
             }
         #end
         }}.toString();
