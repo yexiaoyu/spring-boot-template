@@ -1,6 +1,6 @@
 package com.guanxun.redis;
 
-import com.guanxun.redis.utils.JSONUtil;
+import com.guanxun.redis.utils.RedisJsonUtil;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -55,7 +55,7 @@ public class ZSetRedisTemplate extends BasicRedisTemplate {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-				return connection.zAdd(serializer.serialize(key), score, serializer.serialize(JSONUtil.toJson(member)));
+				return connection.zAdd(serializer.serialize(key), score, serializer.serialize(RedisJsonUtil.toJson(member)));
 			}
 		});
 		return result;
@@ -235,7 +235,7 @@ public class ZSetRedisTemplate extends BasicRedisTemplate {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-				return connection.zRem(serializer.serialize(key), serializer.serialize(JSONUtil.toJson(members)));
+				return connection.zRem(serializer.serialize(key), serializer.serialize(RedisJsonUtil.toJson(members)));
 			}
 		});
 		return result;
@@ -273,7 +273,7 @@ public class ZSetRedisTemplate extends BasicRedisTemplate {
 			@Override
 			public Double doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-				return connection.zScore(serializer.serialize(key), serializer.serialize(JSONUtil.toJson(member)));
+				return connection.zScore(serializer.serialize(key), serializer.serialize(RedisJsonUtil.toJson(member)));
 			}
 		});
 		return result;

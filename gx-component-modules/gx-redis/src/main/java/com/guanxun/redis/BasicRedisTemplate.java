@@ -1,15 +1,12 @@
 package com.guanxun.redis;
 
-import com.guanxun.hepler.SpringHelper;
 import com.guanxun.redis.utils.*;
 import org.slf4j.*;
-import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -76,7 +73,7 @@ public class BasicRedisTemplate {
             Set<T> set = new HashSet<>();
             for(byte[] value : result){
                 RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-                set.add(JSONUtil.toBean(serializer.deserialize(value), clazz));
+                set.add(RedisJsonUtil.toBean(serializer.deserialize(value), clazz));
             }
             return set;
         }
@@ -99,7 +96,7 @@ public class BasicRedisTemplate {
             List<T> set = new ArrayList<>();
             for(byte[] value : result){
                 RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-                set.add(JSONUtil.toBean(serializer.deserialize(value), clazz));
+                set.add(RedisJsonUtil.toBean(serializer.deserialize(value), clazz));
             }
             return set;
         }

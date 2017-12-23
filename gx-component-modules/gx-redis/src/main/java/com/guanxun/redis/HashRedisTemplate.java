@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.guanxun.redis.utils.JSONUtil;
+import com.guanxun.redis.utils.RedisJsonUtil;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -78,7 +78,7 @@ public class HashRedisTemplate extends BasicRedisTemplate {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-				boolean result = connection.hSet(serializer.serialize(key), serializer.serialize(field), serializer.serialize(JSONUtil.toJson(value)));
+				boolean result = connection.hSet(serializer.serialize(key), serializer.serialize(field), serializer.serialize(RedisJsonUtil.toJson(value)));
 				if(result){
 					expire(key, ttl);
 				}
@@ -122,7 +122,7 @@ public class HashRedisTemplate extends BasicRedisTemplate {
 			public T doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
 				byte[] value =  connection.hGet(serializer.serialize(key), serializer.serialize(field));
-				return JSONUtil.toBean(serializer.deserialize(value), clazz);
+				return RedisJsonUtil.toBean(serializer.deserialize(value), clazz);
 			}
 		});
 		return result;
@@ -186,7 +186,7 @@ public class HashRedisTemplate extends BasicRedisTemplate {
 				if (value != null && value.size() > 0) {
 					Map<String, T> newMap = new HashMap<String, T>();
 					for (Map.Entry<byte[], byte[]> entry : value.entrySet()) {
-						newMap.put(serializer.deserialize(entry.getKey()), JSONUtil.toBean(serializer.deserialize(entry.getValue()), clazz));
+						newMap.put(serializer.deserialize(entry.getKey()), RedisJsonUtil.toBean(serializer.deserialize(entry.getValue()), clazz));
 					}
 					return newMap;
 				}

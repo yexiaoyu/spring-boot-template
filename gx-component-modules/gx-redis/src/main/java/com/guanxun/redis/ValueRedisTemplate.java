@@ -1,6 +1,6 @@
 package com.guanxun.redis;
 
-import com.guanxun.redis.utils.JSONUtil;
+import com.guanxun.redis.utils.RedisJsonUtil;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -39,7 +39,7 @@ public class ValueRedisTemplate extends BasicRedisTemplate {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-				connection.set(serializer.serialize(key), serializer.serialize(JSONUtil.toJson(value)));
+				connection.set(serializer.serialize(key), serializer.serialize(RedisJsonUtil.toJson(value)));
 				return true;
 			}
 		});
@@ -64,7 +64,7 @@ public class ValueRedisTemplate extends BasicRedisTemplate {
 			public T doInRedis(RedisConnection connection) throws DataAccessException {
 				RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
 				byte[] value =  connection.get(serializer.serialize(key));
-				return JSONUtil.toBean(serializer.deserialize(value), clazz);
+				return RedisJsonUtil.toBean(serializer.deserialize(value), clazz);
 			}
 		});
 		return result;
@@ -72,14 +72,14 @@ public class ValueRedisTemplate extends BasicRedisTemplate {
 
 
 	public <T> boolean setList(String key, List<T> list) {
-		String value = JSONUtil.toJson(list);
+		String value = RedisJsonUtil.toJson(list);
 		return set(key,value);
 	}
 
 	public <T> List<T> getList(String key, Class<T> clz) {
 		String json = get(key);
 		if(json!=null){
-			List<T> list = JSONUtil.toList(json, clz);
+			List<T> list = RedisJsonUtil.toList(json, clz);
 			return list;
 		}
 		return null;

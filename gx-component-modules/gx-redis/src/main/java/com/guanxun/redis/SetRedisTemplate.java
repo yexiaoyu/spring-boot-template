@@ -2,7 +2,7 @@ package com.guanxun.redis;
 
 import java.util.Set;
 
-import com.guanxun.redis.utils.JSONUtil;
+import com.guanxun.redis.utils.RedisJsonUtil;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -50,7 +50,7 @@ public class SetRedisTemplate extends BasicRedisTemplate {
             @Override
             public Long doInRedis(RedisConnection connection) throws DataAccessException {
                 RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-                return connection.sAdd(serializer.serialize(key), serializer.serialize(JSONUtil.toJson(members)));
+                return connection.sAdd(serializer.serialize(key), serializer.serialize(RedisJsonUtil.toJson(members)));
             }
         });
         return result;
@@ -88,7 +88,7 @@ public class SetRedisTemplate extends BasicRedisTemplate {
             @Override
             public Long doInRedis(RedisConnection connection) throws DataAccessException {
                 RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-                return connection.sRem(serializer.serialize(key), serializer.serialize(JSONUtil.toJson(members)));
+                return connection.sRem(serializer.serialize(key), serializer.serialize(RedisJsonUtil.toJson(members)));
             }
         });
         return result;
@@ -187,7 +187,7 @@ public class SetRedisTemplate extends BasicRedisTemplate {
             public T doInRedis(RedisConnection connection) throws DataAccessException {
                 RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
                 byte[] value =  connection.sPop(serializer.serialize(key));
-                return JSONUtil.toBean(serializer.deserialize(value), clazz);
+                return RedisJsonUtil.toBean(serializer.deserialize(value), clazz);
             }
         });
         return result;
