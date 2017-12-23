@@ -4,6 +4,8 @@ import com.guanxun.common.utils.GxUtils;
 import com.guanxun.model.User;
 import org.apache.ibatis.jdbc.SQL;
 
+import java.util.Map;
+
 public class UserProvider {
     private String tableName = "user";
     private String columns = "id,name,age,password";
@@ -67,6 +69,23 @@ public class UserProvider {
             }
             if(GxUtils.isNotEmpty(user.getAge())){
                 WHERE("age=#{age}");
+            }
+        }}.toString();
+    }
+
+    //{1=30, param1=zhaojigang, param2=30, name=zhaojigang}
+    public String findByNameOrAge(final Map<String, Object> para) {
+        System.out.println(para);
+        return new SQL(){{
+            String name = (String)para.get("name");
+            Integer age = (Integer) para.get("1");
+            SELECT(columns);
+            FROM(tableName);
+            if(GxUtils.isNotEmpty(name)){
+                WHERE("name=#{name}");
+            }
+            if(age != null){
+                WHERE("age=#{param2}");
             }
         }}.toString();
     }

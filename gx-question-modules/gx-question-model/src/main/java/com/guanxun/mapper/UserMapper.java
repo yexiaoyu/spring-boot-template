@@ -29,7 +29,15 @@ public interface UserMapper extends BaseMapper<String, User>{
     @UpdateProvider(type = UserProvider.class, method = "update")
     public int update(User user);
 
+    // 对于只有一个参数的情况，可以直接使用
     @SelectProvider(type=UserProvider.class, method="findList")
     public List<User> findList(User user);
+
+    // http://blog.csdn.net/qqlrq/article/details/45721755
+    // 在超过一个参数的情况下，@SelectProvide方法必须接受Map<String, Object>做为参数
+    // 如果参数使用了@Param注解，那么参数在Map中以@Param的值为key，如下例中的name；
+    // 如果参数没有使用@Param注解，那么参数在Map中以参数的顺序为key，如下例中的age
+    @SelectProvider(type=UserProvider.class, method="findByNameOrAge")
+    public List<User> findByNameOrAge(@Param("name") String name ,Integer age);
 
 }

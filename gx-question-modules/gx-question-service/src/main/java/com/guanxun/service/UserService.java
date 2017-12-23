@@ -34,4 +34,7 @@ public class UserService {
     public List<User> findList(User user){
         return userMapper.findList(user);
     }
+    public List<User> findByNameOrAge(String name, Integer age){
+        return userMapper.findByNameOrAge(name, age);
+    }
 }

@@ -96,4 +96,25 @@ public class UserController {
         return userList;
 
     }
+
+    @ApiOperation("查询用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "name", dataType = "String", required = true, value = "用户的姓名", defaultValue = "zhaojigang"),
+            @ApiImplicitParam(paramType = "query", name = "age", dataType = "int", required = true, value = "用户的年龄", defaultValue = "30"),
+    })
+    @RequestMapping(value = "/findByNameOrAge", method = RequestMethod.POST)
+    public List<User> findByNameOrAge(String name, int age) {
+        User user = new User();
+        user.setAge(age);
+        user.setName(name);
+        // 分页查询:只有紧跟在 PageHelper.startPage 方法后的第一个 MyBatis 的查询(select)方法会被分页。
+        PageHelper.startPage(1, 1, false);
+        List<User> userList = userService.findByNameOrAge(name, age);
+        PageInfo pageInfo = new PageInfo(userList);
+        Page page = (Page) userList;
+        System.out.println(pageInfo);
+        System.out.println(page);
+        return userList;
+
+    }
 }
