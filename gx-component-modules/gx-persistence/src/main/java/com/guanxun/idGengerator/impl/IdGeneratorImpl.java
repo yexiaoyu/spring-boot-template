@@ -4,6 +4,7 @@ import com.guanxun.common.utils.GxUtils;
 import com.guanxun.idGengerator.IdGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
+@Component
 public class IdGeneratorImpl implements IdGenerator {
     Logger logger = LoggerFactory.getLogger(IdGeneratorImpl.class);
     @Resource

@@ -4,6 +4,7 @@ import com.guanxun.model.*;
 import com.guanxun.provider.UserProvider;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface UserMapper extends BaseMapper<String, User>{
      * 这是一个接口，其不需要类去实现它
      * 下边分别是插入，删除，修改，查询一个记录，查询所有的记录
      * */
-
+    @Cacheable(value = "userCache")// 使用缓存
     @SelectProvider(type = UserProvider.class, method = "load")
     public User load(String id);
 
