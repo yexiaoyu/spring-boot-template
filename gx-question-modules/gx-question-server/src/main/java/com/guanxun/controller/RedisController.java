@@ -1,16 +1,12 @@
 package com.guanxun.controller;
 
-import com.guanxun.model.User;
-import com.guanxun.redis.ValueRedisTemplate;
-import com.guanxun.service.UserService;
+import com.guanxun.model.*;
+import com.guanxun.redis.*;
+import com.guanxun.service.*;
 import io.swagger.annotations.*;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.log4j.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -37,7 +33,7 @@ public class RedisController {
     })
     @RequestMapping(value = "/setRedis", method = RequestMethod.POST)
     public User set(String key, String value) {
-        User user = userService.getUserInfo("1");
+        User user = userService.load("1");
         valueRedisTemplate.set(key, user);
         return valueRedisTemplate.get(key, User.class);
     }
