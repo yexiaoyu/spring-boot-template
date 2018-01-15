@@ -1,18 +1,15 @@
 package com.guanxun.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.guanxun.idGengerator.IdGenerator;
+import com.github.pagehelper.*;
 import com.guanxun.model.*;
 import com.guanxun.service.*;
-import com.guanxun.utils.IdGeneratorUtil;
+import com.guanxun.utils.*;
 import io.swagger.annotations.*;
 import org.apache.log4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/user")
@@ -35,7 +32,7 @@ public class UserController {
     })
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
     public User getUserInfoById(String userId) {
-        User user = userService.getUserInfo(userId);
+        User user = userService.load(userId);
 
         if(user!=null){
             System.out.println("user.getName():"+user.getName());
