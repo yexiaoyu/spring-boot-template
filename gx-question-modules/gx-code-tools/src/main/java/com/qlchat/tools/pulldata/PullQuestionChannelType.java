@@ -24,18 +24,8 @@ public class PullQuestionChannelType {
 
         Parser parser = Parser.createParser(result, "utf-8");
         // 遍历所有的节点
-
+        // http://free0007.iteye.com/blog/1131163
         NodeFilter divFilter = new NodeFilter() {
-            @Override
-            public boolean accept(Node node) {
-                if(node.getText().contains("class=\"con-items\"")){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-        };
-        NodeFilter aFilter = new NodeFilter() {
             @Override
             public boolean accept(Node node) {
                 if(node.getText().contains("class=\"con-items\"")){
