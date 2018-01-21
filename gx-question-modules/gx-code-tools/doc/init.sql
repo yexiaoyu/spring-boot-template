@@ -167,13 +167,13 @@ CREATE TABLE `gx_question` (
   KEY `gx_question_charpter` (`chapter_id`),
   KEY `gx_question_topic` (`topic_id`),
   CONSTRAINT `gx_question_channel_type` FOREIGN KEY (`question_channel_type_id`) REFERENCES `gx_question_channel_type` (`id`),
-  CONSTRAINT `gx_question_charpter` FOREIGN KEY (`chapter_id`) REFERENCES `gx_category_tree` (`id`),
+  CONSTRAINT `gx_question_charpter` FOREIGN KEY (`chapter_id`) REFERENCES gx_chapter_topic (`id`),
   CONSTRAINT `gx_question_chid` FOREIGN KEY (`chid_id`) REFERENCES `gx_chid` (`id`),
   CONSTRAINT `gx_question_difficult` FOREIGN KEY (`difficult_id`) REFERENCES `gx_difficult` (`id`),
   CONSTRAINT `gx_question_exam_type` FOREIGN KEY (`exam_type_id`) REFERENCES `gx_exam_type` (`id`),
   CONSTRAINT `gx_question_grade` FOREIGN KEY (`grade_id`) REFERENCES `gx_grade` (`id`),
-  CONSTRAINT `gx_question_topic` FOREIGN KEY (`topic_id`) REFERENCES `gx_category_tree` (`id`),
-  CONSTRAINT `gx_question_version_id` FOREIGN KEY (`textbook_version_id`) REFERENCES `gx_category_tree` (`id`),
+  CONSTRAINT `gx_question_topic` FOREIGN KEY (`topic_id`) REFERENCES gx_chapter_topic (`id`),
+  CONSTRAINT `gx_question_version_id` FOREIGN KEY (`textbook_version_id`) REFERENCES gx_chapter_topic (`id`),
   CONSTRAINT `gx_question_xd` FOREIGN KEY (`xd_id`) REFERENCES `gx_xd` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='题目信息';
 CREATE TABLE `gx_question_channel_type` (
@@ -213,7 +213,7 @@ CREATE TABLE `gx_test_paper` (
   CONSTRAINT `gx_test_paper_chid` FOREIGN KEY (`chid_id`) REFERENCES `gx_chid` (`id`),
   CONSTRAINT `gx_test_paper_grade` FOREIGN KEY (`grade_id`) REFERENCES `gx_grade` (`id`),
   CONSTRAINT `gx_test_paper_region` FOREIGN KEY (`region_id`) REFERENCES `gx_region` (`id`),
-  CONSTRAINT `gx_test_paper_version` FOREIGN KEY (`textbook_version_id`) REFERENCES `gx_category_tree` (`id`),
+  CONSTRAINT `gx_test_paper_version` FOREIGN KEY (`textbook_version_id`) REFERENCES gx_chapter_topic (`id`),
   CONSTRAINT `gx_test_paper_xd` FOREIGN KEY (`xd_id`) REFERENCES `gx_xd` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='试卷信息';
 CREATE TABLE `gx_xd` (
