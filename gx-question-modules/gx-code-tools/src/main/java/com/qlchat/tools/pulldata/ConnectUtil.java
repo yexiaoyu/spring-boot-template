@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 
 import java.sql.*;
+import java.util.List;
 
 public class ConnectUtil {
     private static Connection connection;
@@ -33,9 +34,15 @@ public class ConnectUtil {
         return connection;
     }
 
-    public static void insertInto(String insertSql) throws SQLException {
+    public static void insertInto(String insertSql, List<Object> params) throws SQLException {
         Connection conn = ConnectUtil.getConn();
         PreparedStatement pstmt = (PreparedStatement)conn.prepareStatement(insertSql);
+        if(params != null && params.size() > 0){
+            int i = 0;
+            for (Object param : params) {
+                pstmt.setObject(++i, param);
+            }
+        }
         pstmt.executeUpdate();
     }
 
