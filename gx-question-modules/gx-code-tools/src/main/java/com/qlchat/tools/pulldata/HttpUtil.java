@@ -194,6 +194,12 @@ public class HttpUtil {
 		if (queryParams != null && !queryParams.isEmpty()) {
 			builder.setParameters(HttpUtil.paramsConverter(queryParams));
 		}
+		//请求头设置，特别是cookie设置
+		gm.addHeader("Accept", "text/html, application/xhtml+xml, */*");
+		gm.addHeader("Content-Type", "application/x-www-form-urlencoded");
+		gm.addHeader("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0))");
+		String cookie = "HqNL_ef65_saltkey=xAfETZMO; HqNL_ef65_lastvisit=1516019841; _csrf=e1b65184f4f07b2833d346eab9457fb555f9465a2b093c703dfbfa03bd45aa96a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22abvbrpxnPYJaNUSetf7Lz795fuxe4V-2%22%3B%7D; chid=bd8313dfafcee0d97949afd2be099a6e5a44437eef1f94d21b0a7c33a4321f98a%3A2%3A%7Bi%3A0%3Bs%3A4%3A%22chid%22%3Bi%3A1%3Bs%3A1%3A%224%22%3B%7D; xd=bbc5bced806f427ff9aca7cf1cf56a37c9016539f1da160ae385126fb0d1cc2fa%3A2%3A%7Bi%3A0%3Bs%3A2%3A%22xd%22%3Bi%3A1%3Bs%3A1%3A%223%22%3B%7D; bookversion_paper=4402293cf304fa3622da6b6fa04af775e3fe5252600db238e573dc06440b8955a%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22bookversion_paper%22%3Bi%3A1%3Ba%3A1%3A%7Bi%3A4%3Ba%3A1%3A%7Bi%3A3%3Bs%3A5%3A%2211356%22%3B%7D%7D%7D; nianji_paper=df055cb3646a3f40328511ee7b7ca80d2a5b9f852d147b9dcbbc65a144b55b71a%3A2%3A%7Bi%3A0%3Bs%3A12%3A%22nianji_paper%22%3Bi%3A1%3Ba%3A1%3A%7Bi%3A4%3Ba%3A1%3A%7Bi%3A3%3Bs%3A4%3A%221992%22%3B%7D%7D%7D; Hm_lvt_5d70f3704df08b4bfedf4a7c4fb415ef=1515205926,1516023478,1516371723,1516759609; Hm_lpvt_5d70f3704df08b4bfedf4a7c4fb415ef=1516765751";
+		gm.addHeader("Cookie", cookie);
 		gm.setURI(builder.build());
 		return client.execute(gm);
 	}

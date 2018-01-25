@@ -272,3 +272,39 @@ CREATE TABLE `user` (
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+------------------------------------------------------------------------
+-- 删除重复数据，只留下第一条。mysql中You can't specify target table for update in FROM clause错误的意思是说，不能先select出同一表中的某些值，再update这个表(在同一语句中)。
+DELETE
+FROM
+  gx_paper_question
+WHERE
+  (question_id, paper_id) in (
+      SELECT  t.question_id,
+        t.paper_id FROM (
+            SELECT
+              b.question_id,
+              b.paper_id
+            FROM
+              gx_paper_question b
+            GROUP BY
+              b.question_id,
+              b.paper_id
+            HAVING
+              count(*) > 1) t)
+  AND id NOT IN (
+    SELECT t.id
+    FROM (
+      SELECT
+        min(c.id) id
+      FROM
+        gx_paper_question c
+      GROUP BY
+        c.question_id,
+        c.paper_id
+      HAVING
+        count(*) > 1
+      ) t
+  );
+
